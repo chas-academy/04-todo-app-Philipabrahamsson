@@ -13,10 +13,10 @@ class TodoController extends Controller {
     }
 
     public function add()
-    {
+    {   
+      
         $body = filter_body();
         $result = TodoItem::createTodo($body['title']);
-
         if ($result) {
           $this->redirect('/');
         }
@@ -39,9 +39,12 @@ class TodoController extends Controller {
 
     public function delete($urlParams)
     {
-      // TODO: Implement me!
+        $todoId = $urlParams['id'];
+        $result = TodoItem::deleteTodo($todoId);
+        if ($result) {
+            $this->redirect('/');
+        }
     }
-
     /**
      * OPTIONAL Bonus round!
      * 
